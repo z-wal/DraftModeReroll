@@ -1,0 +1,71 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+   <Script file="WildCardReroll.lua"/>
+
+   <!-- Frame to handle all core events --> 
+   <Frame name="WildCardRerollFrame"> 
+      <Scripts> 
+         <OnLoad> 
+            WildCardReroll_OnLoad();
+         </OnLoad> 
+         <OnEvent>
+            WildCardReroll_OnEvent(event);
+         </OnEvent>
+         <OnUpdate>
+         	WildCardReroll_OnUpdate();
+        </OnUpdate>
+      </Scripts> 
+   </Frame>
+    
+    <GameTooltip name="WildCardReroll_TT" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate">
+		<Scripts>
+			<OnLoad>
+				this:SetOwner(UIParent, "ANCHOR_NONE");
+			</OnLoad>
+		</Scripts>
+    </GameTooltip>
+    
+    <GameTooltip name="WildCardReroll_TextBoxTT" inherits="GameTooltipTemplate" parent="UIParent" enableMouse="true" toplevel="true" movable="true" frameStrata="TOOLTIP" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="$parentCloseButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(WildCardReroll_TextBoxTT);
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				GameTooltip_OnLoad(self);
+				this:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				ValidateFramePosition(this);
+			</OnDragStop> 
+		</Scripts>
+    </GameTooltip>
+</Ui>
