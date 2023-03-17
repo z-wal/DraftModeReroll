@@ -437,7 +437,7 @@ function RecreateMacro()
 	local macroName3,_,_,_ = GetMacroInfo("RerollVBM");
 	
 	if(macroName3 == nil) then
-		CreateMacro("RerollVBM", 10, "/use Spelldraft Deck\n/click StaticPopup1Button1", 1);
+		CreateMacro("RerollVBM", 10, "/use Spelldraft Deck", 1);
 		PickupMacro("RerollVBM");
 		PlaceAction(1);
 	end
